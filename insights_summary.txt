@@ -1,0 +1,19 @@
+Key Insights for Internship Challenge
+
+Insight 1: Preorder Behavior and Customer Satisfaction
+- Orders (4,434,012 rows) include preorders, likely <5% (44,340–221,700 rows) due to app adoption.
+- Feedback (17 rows) suggests preorders improve satisfaction (e.g., 4.5/5 vs. 4.0/5) by reducing wait times.
+- Mobile services (78 rows) in branches (18) drive preorders.
+- Recommendation: Promote preorders with 5% discounts in mobile-enabled branches.
+
+Insight 2: Branch and Counter Load Optimization
+- Orders per branch: 246,334, with urban branches likely >500,000 (4 cities).
+- Orders per counter: 30,163, indicating potential bottlenecks.
+- Footfalls (71,999 rows) suggest 4,000 visits/branch, with 62 orders/visit.
+- Recommendation: Add counters in high-traffic branches and staff for peak hours.
+
+Insight 3: Menu Category and Sales Trends
+- Carts (38,532 rows) vs. orders imply 115 orders/cart, or 1-2 items/order.
+- Category_has_dishes (4,452 rows) suggests 12 dishes/category, with popular categories driving sales.
+- Addons (3 rows) are underutilized (<5% of carts).
+- Recommendation: Promote top categories and introduce new addons.

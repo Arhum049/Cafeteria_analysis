@@ -1,0 +1,468 @@
+TABLE: addons (rows:3)
+- `id` bigint UNSIGNED NOT NULL
+- `addon_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `addon_price` double(9,2) NOT NULL
+- `addon_for_all` int DEFAULT NULL
+- `dish_id` int NOT NULL
+- `variant_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: areas (rows: 28)
+- `id` bigint UNSIGNED NOT NULL
+- `area_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `is_active` int NOT NULL DEFAULT '1'
+- `location_id` int NOT NULL
+- `branch_id` int DEFAULT NULL
+- `images` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: branches (rows: 18 )
+- `id` bigint UNSIGNED NOT NULL
+- `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `branch_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `branch_merchant_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `branch_manager` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `invoice_prefix` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `contact_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `is_active` int NOT NULL DEFAULT '1' COMMENT '1=active, 0=deactive'
+- `company_has_region_id` int DEFAULT NULL
+- `company_id` int DEFAULT NULL
+- `is_pos` int NOT NULL DEFAULT '0'
+- `is_sok` int NOT NULL DEFAULT '0'
+- `is_qrcode` int NOT NULL DEFAULT '0'
+- `is_mobile_ordering` int NOT NULL DEFAULT '0'
+- `is_table_room` int NOT NULL DEFAULT '0'
+- `country_id` int DEFAULT NULL
+- `state_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `city_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `license_id` int DEFAULT NULL
+- `license_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `gst_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `tax_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `discount_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `is_for_app` int NOT NULL DEFAULT '0'
+- `dining_page_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: branch_has_services (rows: 78 )
+- `id` bigint UNSIGNED NOT NULL
+- `services_id` int DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: branch_has_taxes (rows:97 )
+- `id` bigint UNSIGNED NOT NULL
+- `branch_id` int NOT NULL
+- `tax_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: branch_offer_banners (rows:2 )
+- `id` bigint UNSIGNED NOT NULL
+- `branch_id` int NOT NULL
+- `banner_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `is_active` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: carts (rows: 38532 )
+- `id` bigint UNSIGNED NOT NULL
+- `dish_id` int NOT NULL
+- `variant_id` int DEFAULT NULL
+- `menu_id` int DEFAULT NULL
+- `addons_id` int DEFAULT NULL
+- `addons_price` double(9,2) DEFAULT NULL
+- `extras_id` int DEFAULT NULL
+- `extras_price` double(9,2) DEFAULT NULL
+- `discount_percent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `discount_amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `tax_percent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `tax_amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `dish_price` double(9,2) NOT NULL
+- `quantity` int NOT NULL
+- `is_variant` int NOT NULL DEFAULT '0'
+- `total_price` double(9,2) NOT NULL
+- `user_id` int DEFAULT NULL
+- `space_id` int DEFAULT NULL COMMENT 'Table/Room id'
+- `ip_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: categories (rows: 386)
+- `id` bigint UNSIGNED NOT NULL
+- `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `images` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `counter_id` int DEFAULT NULL
+- `discount_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `category_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'veg, nonveg, beverages'
+- `is_active` int NOT NULL DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: category_has_dishes (rows: 4452 )
+- `id` bigint UNSIGNED NOT NULL
+- `category_id` int NOT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: category_has_menus (rows: 483 )
+- `id` bigint UNSIGNED NOT NULL
+- `category_id` int NOT NULL
+- `menu_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: cities (rows: 4)
+- `id` bigint UNSIGNED NOT NULL
+- `city_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `state_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: companies (rows: 2)
+- `id` bigint UNSIGNED NOT NULL
+- `company_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `company_logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `is_active` int NOT NULL DEFAULT '1' COMMENT '1=active, 0=deactive'
+- `registered_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `country_id` int DEFAULT NULL
+- `state_id` int DEFAULT NULL
+- `city_id` int DEFAULT NULL
+- `is_pos` int NOT NULL DEFAULT '0'
+- `is_sok` int NOT NULL DEFAULT '0'
+- `is_qrcode` int NOT NULL DEFAULT '0'
+- `is_mobile_ordering` int NOT NULL DEFAULT '0'
+- `current_app_version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `is_table_room` int NOT NULL DEFAULT '0'
+- `pincode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `CIN_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `is_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `created_by` int DEFAULT NULL
+- `updated_by` int DEFAULT NULL
+- `food_license_id` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: company_has_regions (rows:3)
+- `id` bigint UNSIGNED NOT NULL
+- `company_id` int NOT NULL
+- `region_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: company_has_services (rows:11 )
+- `id` bigint UNSIGNED NOT NULL
+- `services_id` int DEFAULT NULL
+- `company_id` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: counters (rows: 147 )
+- `id` bigint UNSIGNED NOT NULL
+- `counter_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `counter_number` bigint NOT NULL
+- `counter_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `license_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `tax_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `license_expiry_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `area_id` int DEFAULT NULL
+- `discount_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `template_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `vendor_id` int DEFAULT NULL
+- `app_vendor_id` int DEFAULT NULL
+- `priority` int DEFAULT NULL
+- `todays_paragraph` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `todays_favorites` int NOT NULL DEFAULT '0'
+- `isDigitalDashboard` int NOT NULL DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: countries (rows:1 )
+- `id` bigint UNSIGNED NOT NULL
+- `country_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `country_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: country_taxes (rows:4 )
+- `id` bigint UNSIGNED NOT NULL
+- `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `tax_percent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `country_id` int NOT NULL
+- `is_active` int NOT NULL DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: currencies (rows: 1 )
+- `id` bigint UNSIGNED NOT NULL
+- `currency_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `currency_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `country_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: discounts (rows:5)
+- `id` bigint UNSIGNED NOT NULL
+- `discount_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `discount_percent` int NOT NULL
+- `is_active` int DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dishes (rows: )
+- `id` bigint UNSIGNED NOT NULL
+- `dish_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `dish_price` decimal(9,2) NOT NULL
+- `dish_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `dish_images` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `has_variant` int DEFAULT NULL
+- `is_tax_inclusive` int DEFAULT NULL
+- `is_discount` int DEFAULT NULL
+- `category_id` int DEFAULT NULL
+- `counter_id` int DEFAULT NULL
+- `discount_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `chef_preparation` int NOT NULL DEFAULT '0' COMMENT 'chef preparation required'
+- `preparation_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `dish_hsn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `dish_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'veg, nonveg, beverages'
+- `item_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0=live, 1=ready to go'
+- `stock_quantity` int DEFAULT NULL
+- `stock_type` int DEFAULT NULL
+- `edited_at` timestamp NULL DEFAULT NULL
+- `edited_by` int DEFAULT NULL
+- `is_available` int NOT NULL DEFAULT '1'
+- `popular_special` int NOT NULL DEFAULT '0'
+- `is_active` int NOT NULL DEFAULT '1'
+- `is_edible` tinyint NOT NULL DEFAULT '1' COMMENT '1=Edible, 0=Not Edible'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dish_extras (rows:0 )
+- `id` bigint UNSIGNED NOT NULL
+- `variant_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `extra_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `extra_price` decimal(9,2) NOT NULL
+- `extra_for_all` int NOT NULL DEFAULT '0'
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dish_has_taxes (rows:12210  )
+- `id` bigint UNSIGNED NOT NULL
+- `tax_id` int NOT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dish_measurement_units (rows: 0 )
+- `id` bigint UNSIGNED NOT NULL
+- `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dish_options (rows: 0)
+- `id` bigint UNSIGNED NOT NULL
+- `option_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `option_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: dish_variants (rows:0 )
+- `id` bigint UNSIGNED NOT NULL
+- `variant_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `variant_price` decimal(9,2) NOT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: extras (rows:2 )
+- `id` bigint UNSIGNED NOT NULL
+- `extras_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `variant_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `extras_price` double(9,2) NOT NULL
+- `extras_for_all` int DEFAULT NULL
+- `dish_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: feedback_answers (rows:17 )
+- `id` bigint UNSIGNED NOT NULL
+- `company_id` int DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `counter_id` int DEFAULT NULL
+- `question_id` int DEFAULT NULL
+- `rating` int DEFAULT NULL
+- `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `user_id` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: feedback_questions (rows: 1 )
+- `id` bigint UNSIGNED NOT NULL
+- `question` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `company_id` int DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `created_by` int DEFAULT NULL
+- `updated_by` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: food_licenses (rows:0)
+- `id` bigint UNSIGNED NOT NULL
+- `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `format` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: footfalls (rows: 71999 )
+- `id` bigint UNSIGNED NOT NULL
+- `group_id` int NOT NULL
+- `counter_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `meal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `meal_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `covers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `revenue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `counter_id` int DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `average_spend` double(10,2) NOT NULL
+- `participation` int DEFAULT NULL
+- `od_date` date DEFAULT NULL
+- `previous_footfall` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: licenses (rows:1 )
+- `id` bigint UNSIGNED NOT NULL
+- `license_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `format` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `alises_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `example` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `country_id` int NOT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: locations (rows:18 )
+- `id` bigint UNSIGNED NOT NULL
+- `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `state_id` int DEFAULT NULL
+- `city_id` int DEFAULT NULL
+- `pincode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `edited_at` timestamp NULL DEFAULT NULL
+- `edited_by` int DEFAULT NULL
+- `vip_percent` int DEFAULT NULL
+- `vvip_percent` int DEFAULT NULL
+- `license_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `license_format` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `country_id` int DEFAULT NULL
+- `discount_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `lat` double(10,7) DEFAULT NULL
+- `long` double(10,7) DEFAULT NULL
+- `contact_person` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `contact_person_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `is_active` int NOT NULL DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: location_discounts (rows:0 )
+- `id` bigint UNSIGNED NOT NULL
+- `discount_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `discount_percent` int DEFAULT NULL
+- `start_date` timestamp NULL DEFAULT NULL
+- `end_date` timestamp NULL DEFAULT NULL
+- `location_id` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: location_taxes (rows: 0)
+- `id` bigint UNSIGNED NOT NULL
+- `tax_percent` int NOT NULL
+- `location_id` int NOT NULL
+- `tax_id` int NOT NULL
+- `is_active` int NOT NULL DEFAULT '1'
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: menus (rows: 316 )
+- `id` bigint UNSIGNED NOT NULL
+- `menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `from_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `to_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `company_id` int DEFAULT NULL
+- `branch_id` int DEFAULT NULL
+- `counter_id` int DEFAULT NULL
+- `offtime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `repeat_days` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `is_active` int NOT NULL DEFAULT '1'
+- `updated_by` int DEFAULT NULL
+- `created_by` int DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
+
+TABLE: orders (rows: 4434012)
+- `id` bigint UNSIGNED NOT NULL
+- `order_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+- `user_id` int NOT NULL
+- `order_status` int NOT NULL DEFAULT '0'
+- `status_update_time` timestamp NULL DEFAULT NULL
+- `cd_status` int NOT NULL DEFAULT '0'
+- `order_date` timestamp NULL DEFAULT NULL
+- `device_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `branch_id` int NOT NULL
+- `branch_merchant_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `counter_id` int DEFAULT NULL
+- `category_id` int DEFAULT NULL
+- `order_through` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `sub_total` double(9,2) NOT NULL
+- `tax_amount` double(9,2) NOT NULL
+- `tax_percent` int NOT NULL
+- `discount_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `discount_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `discount_amount` double(9,2) DEFAULT NULL
+- `mode_of_transaction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `payment_timestamp` timestamp NULL DEFAULT NULL
+- `order_prepared_by` int DEFAULT NULL
+- `order_closed_by` int DEFAULT NULL
+- `order_closed_type` tinyint DEFAULT NULL COMMENT '1:cron,2:QR,3:user'
+- `order_closed_time` timestamp NULL DEFAULT NULL
+- `order_cancel_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `order_cancel_by` int DEFAULT NULL
+- `order_cancel_at` timestamp NULL DEFAULT NULL
+- `grand_total` double(9,2) NOT NULL
+- `invoice_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `paid_or_cancel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `refund_through` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `instruction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `received_transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `transaction_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+- `day_closure_report_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+- `day_closure_created_by` bigint UNSIGNED DEFAULT NULL
+- `day_closure_created_time` datetime DEFAULT NULL
+- `received_amount` double(8,2) DEFAULT NULL
+- `returned_amount` double(8,2) DEFAULT NULL
+- `refunded_amount` int DEFAULT NULL
+- `table_id` int DEFAULT NULL
+- `table_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+- `reward_points` int DEFAULT NULL
+- `reward_amount` double(10,2) DEFAULT NULL
+- `is_refunded` tinyint NOT NULL DEFAULT '0'
+- `is_preorder` int NOT NULL DEFAULT '0'
+- `preorder_time` timestamp NULL DEFAULT NULL
+- `json_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+- `IST_timezone` timestamp NULL DEFAULT NULL
+- `order_create_time` timestamp NULL DEFAULT NULL
+- `created_at` timestamp NULL DEFAULT NULL
+- `updated_at` timestamp NULL DEFAULT NULL
